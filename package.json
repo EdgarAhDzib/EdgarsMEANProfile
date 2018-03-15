@@ -1,0 +1,35 @@
+{
+  "name": "edgarsmeanprofile",
+  "version": "1.0.0",
+  "description": "MEAN-platform portfolio",
+  "main": "server.js",
+  "scripts": {
+    "test": "console.log(\"Active\");",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EdgarAhDzib/EdgarsMEANProfile.git"
+  },
+  "keywords": [
+    "MongoDB",
+    "Angular",
+    "Mongoose",
+    "Node",
+    "NPM",
+    "Express",
+    "portfolio"
+  ],
+  "author": "Edgar Martin del Campo",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "mongoose": "^5.0.10",
+    "bluebird": "^3.5.1",
+    "morgan": "^1.9.0"
+  },
+  "bugs": {
+    "url": "https://github.com/EdgarAhDzib/EdgarsMEANProfile/issues"
+  },
+  "homepage": "edgarmartindelcampo.com"
+}
