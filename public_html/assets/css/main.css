@@ -5,6 +5,7 @@ html, body, article {
 
 body {
 	overflow: hidden;
+	margin-left: 0px;
 }
 
 #navbar, #navBottom {
@@ -100,8 +101,22 @@ body {
 
 .linkTitle {
 	font-size: 150%;
+	background-color: black;
+	color: white;
+	padding: 5px;
+	font-family: 'Bookman Old Style';
 
 	/*padding-left: 10px;*/
+}
+
+.linkTitle:hover {
+	background-color: #6f6f6f;
+	text-decoration:underline;
+}
+
+.linkTitle a {
+	color: white;
+	text-decoration:none;
 }
 
 .linkSub {
@@ -148,6 +163,11 @@ article {
 	/*margin: auto;*/
 	/*margin-left: 100px;*/
 	/*margin-right: 100px;*/
+}
+
+#tnRow {
+	display: flex;
+	justify-content: space-between;
 }
 
 .cerrito {

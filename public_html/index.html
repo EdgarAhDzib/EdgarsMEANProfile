@@ -7,6 +7,7 @@
 	<link rel="shortcut icon" href="favicon.ico" />
 	<link rel="stylesheet" type="text/css" href="assets/css/main.css" />
 	<link rel="stylesheet" type="text/css" href="assets/css/angular.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/modal.css" />
 </head>
 <script src="./assets/js/angular.min.js"></script>
 <script src="./assets/js/angular-animate.js"></script>
@@ -14,6 +15,18 @@
 <script src="./assets/js/jquery-3.1.1.min.js"></script>
 <script src="./assets/js/app.js"></script>
 <body ng-app="portfolio" ng-controller="ctrl">
+	<div class="modal" ng-show="isOpen">
+		<div class="modalContainer">
+			<span class="closeCursor" ng-click="toggleModal(false)">CLOSE &times;</span>
+			<div class="imgGallery" ng-repeat="images in gallery">
+				<div class="lightBoxComp" ng-show="images.selected">
+					<span ng-click="galleryScroll(images.index, 'prev')" ng-show="showLArrow" class="navArrows">&lt;&lt;</span>
+					<img class="lightBox" ng-src="assets/images/{{images.path}}" />
+					<span ng-click="galleryScroll(images.index, 'next')" ng-show="showRArrow" class="navArrows">&gt;&gt;</span>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div id="navbar">
 		<h2>
 			<div class="panelItems">
@@ -36,29 +49,37 @@
 			<div ng-repeat="element in list">
 				<div class="menuElement" id="listItem{{element.id}}">
 					<div class="tnContainer">
-						<a href="{{element.link}}" target="_blank"><img class="linkTn" src="assets/images/{{element.image}}" /></a>
+						<a href="{{element.link}}" target="_blank"><img class="linkTn" ng-src="assets/images/{{element.image}}" /></a>
 					</div>
 					<div class="itemContainer">
 						<span class="linkTitle"><a href="{{element.link}}" target="_blank" ng-bind-html="element.title"></a></span>
 						<br/>
+						<br/>
 						<span class="linkSub" ng-bind-html="element.description"></span>
-						<!-- <div style="float:clear;"></div> -->
 					</div>
 					<br/>
 				</div>
 			</div>
 			<div ng-repeat="item in results">
 				<div id="menuItem{{item.id}}">
-					<h3 ng-click="artRoute(item.id)" ng-bind-html="item.title"></h3>
-					<h4 ng-bind-html="item.subTitle"></h4>
+					<span class="linkTitle" ng-click="artRoute(item.id)" ng-bind-html="item.title"></span>
+					<br/>
+					<br/>
+					<span class="linkSub" ng-bind-html="item.subTitle"></span>
+					<br/>
+					<br/>
 					<br/>
 				</div>
 			</div>
 			<div ng-repeat="content in contents"><!-- ng-repeat required for proper entry animation !-->
 				<div><h2 ng-bind-html="content.title"></h2></div>
+				<div><h3 ng-show="content.otherPage">Page {{content.pageNo}} of 2</h3></div>
 				<div ng-bind-html="content.article"></div>
-				<div ng-repeat="image in content.artImages">
-					<img src="assets/images/{{image}}" class="articleTn" max-width="100" max-height="100" />
+				<div><h3 ng-click="artRoute(content.id, content.otherPage)" ng-show="content.pageLink">{{content.pageLink}}</h3></div>
+				<div id="tnRow" >
+					<div ng-repeat="image in content.artImages">
+						<img ng-click="toggleModal(true, image)" ng-src="assets/images/{{image}}" class="articleTn" max-width="100" max-height="100" />
+					</div>
 				</div>
 			</div>
 		</article>
@@ -70,7 +91,7 @@
 			<div class="faceBook iconTab"><a href="https://www.facebook.com/ShamansCross/" target="_blank"><img class="icon" src="assets/images/icons/fb-likebutton-online-72.png" /></a></div>
 			<div class="youTube iconTab"><a href="https://www.youtube.com/channel/UCju74A_kAhFnnyPjq3JXRBQ" target="_blank"><img class="icon" src="assets/images/icons/YouTube-logo-full_color.png" /></a></div>
 			<div class="twitter iconTab"><a href="https://twitter.com/EdgarTlamatini" target="_blank"><img class="icon" src="assets/images/icons/Twitter_logo_blue.png" /></a></div>
-			<div class="email iconTab"> Email </div>
+			<div class="email iconTab"> Email <br/>(Under construction)</div>
 		</div>
 	</div>
 </body>
