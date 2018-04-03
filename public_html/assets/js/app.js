@@ -135,6 +135,9 @@ app.controller("ctrl", function($scope, $http) {
 			default: return;
 		}
 		// Math validation on impossible numbers
+		if (index < 0 || index >= $scope.gallery.length || !Number.isInteger(index)) {
+			return;
+		}
 		$scope.toggleModal(true, $scope.gallery[index].path);
 	}
 

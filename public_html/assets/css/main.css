@@ -94,9 +94,6 @@ body {
 	display : inline;
 	overflow-y: visible;
 	margin-left: 30px;
-
-	/*white-space : nowrap;*/
-	/*float: left;*/
 }
 
 .linkTitle {
@@ -139,15 +136,10 @@ body {
 	margin: auto;
 	display:block;
 	top: 0px;
-
-	/*overflow:auto;*/
-	/*margin-left: 20%;
-	margin-left: 100px;
-	margin-right: 100px; */	
 }
 
 article {
-	background-image: url("../images/wallpapers/codex.jpg");
+	background-image: url("../images/codex.jpg");
 	border-radius: 15px;
 	padding-left: 5%;
 	padding-right: 5%;
@@ -157,12 +149,6 @@ article {
 	position: absolute;
 	display:block;
 	overflow:auto;
-
-	/*margin-bottom: 100px;*/
-	/*margin: 10%;*/
-	/*margin: auto;*/
-	/*margin-left: 100px;*/
-	/*margin-right: 100px;*/
 }
 
 #tnRow {
