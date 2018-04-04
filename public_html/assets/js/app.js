@@ -125,7 +125,6 @@ app.controller("ctrl", function($scope, $http) {
 		}
 	}
 
-
 	$scope.galleryScroll = function(index, dir) {
 		switch (dir) {
 			case "prev" : index -= 1;
@@ -141,4 +140,23 @@ app.controller("ctrl", function($scope, $http) {
 		$scope.toggleModal(true, $scope.gallery[index].path);
 	}
 
+	$http({method: "GET", url: "/wallpapers"})
+	.then(function(success){
+		$scope.videoBkgd = false;
+		var randIndex = Math.floor(Math.random() * success.data.length);
+		var randBackGd = success.data[randIndex];
+		var videoType = /(\.mp4)$/i;
+		if (videoType.test(randBackGd)) {
+			// Set up video background
+			$scope.videoBkgd = true;
+			console.log(randBackGd);
+			$scope.videoSrc = randBackGd;
+		} else {
+			randBackGd = "url(/assets/images/wallpapers/" + randBackGd + ")";
+			$('body').css("background-image", randBackGd);
+		}
+		// $scope.gallery = [];
+	}, function(error){
+		console.log("Error:", error);
+	});
 });

@@ -3,6 +3,17 @@ const router = express.Router();
 
 const Article = require("../models/articles");
 
+const Item = require("../models/items");
+
+// lists.js not getting accessed in Production, moved here
+router.get("/lists/:categ", (req, res) => {
+	var categ = req.params.categ;
+	Item.find({categ:categ}).exec(function(err, doc){
+		if (err) throw err;
+		res.json(doc);
+	});
+});
+
 router.get("/index", (req, res) => {
 	Article.find({keyword:"index"}).exec(function(err, doc){
 	// Article.find({keyword:"doopeedoo"}).exec(function(err, doc){
@@ -63,6 +74,21 @@ router.get("/page/:id/:pageNo", (req, res) => {
 			res.json(doc);
 		}
 	});
+});
+
+// Generate array of background media for random display
+router.get("/wallpapers", (req, res) => {
+	const imgFolder = './public_html/assets/images/wallpapers/';
+	const fs = require('fs');
+	var backGrounds = [];
+
+	fs.readdirSync(imgFolder).forEach(file => {
+		var mediaTypes = /(\.jpg|\.jpeg|\.png|\.gif|\.mp4)$/i;
+		if (mediaTypes.test(file)) {
+			backGrounds.push(file);
+		}
+	});
+	res.json(backGrounds);
 });
 
 module.exports = router;
