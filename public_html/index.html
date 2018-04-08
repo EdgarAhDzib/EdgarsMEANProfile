@@ -17,8 +17,42 @@
 <body ng-app="portfolio" ng-controller="ctrl" class="wallPapers">
 	<div class="modal" ng-show="isOpen">
 		<div class="modalContainer">
-			<span class="closeCursor" ng-click="toggleModal(false)">CLOSE &times;</span>
-			<div class="imgGallery" ng-repeat="images in gallery">
+			<span class="closeCursor" ng-click="closeModal()">CLOSE &times;</span>
+			<div id="emailSection" ng-show="emailFormEl">
+				<form id="emailModalForm" class="email" name="emailForm" ng-submit="formSubmit()" novalidate>
+					<div class="inputDiv">
+						<span class="formText">Name</span> <input type="text" name="name" ng-model="email.name" ng-required="true" />
+					</div>
+					<div class="inputDiv validation" ng-show="emailForm.name.$touched && emailForm.name.$invalid">
+						Please enter your name!
+					</div>
+					<div class="inputDiv">
+						<span class="formText">Email</span> <input type="email" name="address" ng-model="email.address" ng-required="true" />
+					</div>
+					<div class="inputDiv validation" ng-show="emailForm.address.$touched && emailForm.address.$invalid">
+						Please enter a valid email!
+					</div>
+					<div class="inputDiv">
+						<span class="formText">Subject</span> <input type="text" name="subject" ng-model="email.subject" />
+					</div>
+					<div>
+						<span class="formText">Message</span><br/><textarea placeholder="Message!" name="message" ng-model="email.message" ng-required="true"></textarea>
+					</div>
+					<div class="inputDiv validation" ng-show="emailForm.message.$touched && emailForm.message.$invalid">
+						Please complete your message!
+					</div>
+					<div class="inputDiv">
+						<input type="submit" value="Send" ng-disabled="emailForm.$invalid" />
+					</div>
+				</form>
+			</div>
+
+			<div id="responseText" ng-show="emailSent">
+				{{emailResult}}
+			</div>
+
+
+			<div class="imgGallery" ng-show="galleryOpen" ng-repeat="images in gallery">
 				<div class="lightBoxComp" ng-show="images.selected">
 					<span ng-click="galleryScroll(images.index, 'prev')" ng-show="showLArrow" class="navArrows">&lt;&lt;</span>
 					<img class="lightBox" ng-src="assets/images/{{images.path}}" />
@@ -77,7 +111,7 @@
 				<div><h3 ng-click="artRoute(content.id, content.otherPage)" ng-show="content.pageLink">{{content.pageLink}}</h3></div>
 				<div id="tnRow" >
 					<div ng-repeat="image in content.artImages">
-						<img ng-click="toggleModal(true, image)" ng-src="assets/images/{{image}}" class="articleTn" max-width="100" max-height="100" />
+						<img ng-click="toggleGallery(image)" ng-src="assets/images/{{image}}" class="articleTn" max-width="100" max-height="100" />
 					</div>
 				</div>
 			</div>
@@ -90,7 +124,7 @@
 			<div class="faceBook iconTab"><a href="https://www.facebook.com/ShamansCross/" target="_blank"><img class="icon" src="assets/images/icons/fb-likebutton-online-72.png" /></a></div>
 			<div class="youTube iconTab"><a href="https://www.youtube.com/channel/UCju74A_kAhFnnyPjq3JXRBQ" target="_blank"><img class="icon" src="assets/images/icons/YouTube-logo-full_color.png" /></a></div>
 			<div class="twitter iconTab"><a href="https://twitter.com/EdgarTlamatini" target="_blank"><img class="icon" src="assets/images/icons/Twitter_logo_blue.png" /></a></div>
-			<div class="email iconTab"> Email <br/>(Under construction)</div>
+			<div class="iconTab" ng-click="openEmail()"><h2>Email</h2></div>
 		</div>
 	</div>
 </body>

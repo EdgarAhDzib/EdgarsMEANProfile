@@ -10,7 +10,14 @@ router.get("/lists/:categ", (req, res) => {
 	var categ = req.params.categ;
 	Item.find({categ:categ}).exec(function(err, doc){
 		if (err) throw err;
-		res.json(doc);
+		if (doc.length == 0) {
+			Article.find({keyword:"index"}).exec(function(error, result){
+				if (error) throw error;
+				res.json(result);
+			});
+		} else {
+			res.json(doc);
+		}
 	});
 });
 

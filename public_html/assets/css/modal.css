@@ -8,6 +8,40 @@
 	100%	{opacity: 1;}
 }
 
+input, textarea {
+	border-radius: 10%;
+	padding: 2px;
+}
+
+textarea {
+	right: 0px;
+	width: 395px;
+	height: 75px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+input[type=text], input[type=email] {
+	right: 0px;
+	width: 60%;
+}
+
+input[type=submit] {
+	width: 75px;
+	height: 40px;
+	font-size: 120%;
+	background-color: #89fe97;
+}
+
+input[disabled="disabled"] {
+	background-color: #fe8989;
+	cursor: not-allowed;
+}
+
+input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched {
+	border: 2px solid red;
+}
+
 .modal {
 	position: fixed;
 	z-index: 5;
@@ -48,10 +82,37 @@
 	padding-top: 100px;
 }
 
-.closeCursor {
+.closeCursor, #responseText {
 	font-size: 200%;
 	text-align: center;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+#emailSection {
+	width: 400px;
+	display:block;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: rgba(13,52,3,0.8);
+	padding: 10px;
+	border: 2px solid black;
+	border-radius: 5%;
+}
+
+.inputDiv {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 5px;
+	margin-bottom: 5%;
+}
+
+#emailModalForm {
+	display: block;
+}
+
+.formText {
+	font-size: 150%;
+	font-weight: 500;
 }

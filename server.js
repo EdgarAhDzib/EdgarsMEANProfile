@@ -14,9 +14,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.text());
 
 const articles = require("./config/routes/articles");
-const lists = require("./config/routes/lists");
+const mailer = require("./config/routes/mailer");
 app.use("/", articles);
-app.use("/", lists);
+app.use("/", mailer);
 
 // var databaseUri = "mongodb://localhost/portfolio";
 var databaseUri = "mongodb://127.0.0.1/portfolio";

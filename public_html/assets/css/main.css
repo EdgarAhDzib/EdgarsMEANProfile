@@ -6,7 +6,19 @@ html, body, article {
 body {
 	overflow: hidden;
 	margin-left: 0px;
+	background-color: black;
 }
+
+/* Keeping for wallpaper reference */
+/*
+video {
+	z-index: 2;
+}
+
+.noWallPaper {
+	background-image: none;
+}
+*/
 
 #navbar, #navBottom {
 	position: fixed;

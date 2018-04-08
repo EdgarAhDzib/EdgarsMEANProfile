@@ -2,8 +2,11 @@ var app = angular.module("portfolio", ['ngSanitize', 'ngAnimate']);
 
 app.controller("ctrl", function($scope, $http) {
 
-	// Modal is off by default
+	// Modal settings off by default
 	$scope.isOpen = false;
+	$scope.galleryOpen = false;
+	$scope.emailFormEl = false;
+	$scope.emailSent = false;
 
 	$http({method: "GET", url: "/index"})
 	.then(function(success){
@@ -103,8 +106,9 @@ app.controller("ctrl", function($scope, $http) {
 		});
 	}
 
-	$scope.toggleModal = function(isOpen, file) {
-		$scope.isOpen = isOpen;
+	$scope.toggleGallery = function(file) {
+		$scope.isOpen = true;
+		$scope.galleryOpen = true;
 		if (file) {
 			if ($scope.gallery.length < 2) {
 				$scope.showLArrow = false;
@@ -125,6 +129,51 @@ app.controller("ctrl", function($scope, $http) {
 		}
 	}
 
+	$scope.closeModal = function() {
+		$scope.isOpen = false;
+		$scope.galleryOpen = false;
+		$scope.emailFormEl = false;
+		$scope.emailSent = false;
+	}
+
+	$scope.openEmail = function() {
+		$scope.isOpen = true;
+		$scope.emailFormEl = true;
+	}
+
+	$scope.formSubmit = function() {
+		var name = $scope.email.name;
+		var address = $scope.email.address;
+		var subject = typeof $scope.email.subject === "undefined" ? "" : $scope.email.subject;
+		var message = $scope.email.message;
+		var body = {
+			name: name,
+			address: address,
+			subject: subject,
+			message: message
+		};
+		$http({method: "POST", url: "/mailer", data: body})
+		.then(function(success){
+			// Reset form only if email delivery succeeded and $scope.emailForm is not false
+			if (success.status == 200 && $scope.emailForm) {
+				// Send message into alert
+				$scope.emailResult = success.data.response;
+				$scope.emailSent = true;
+				// Close modal and reset form if email was sent
+				if (success.data.reset) {
+					$scope.emailForm.$setPristine();
+					$scope.emailForm.$setUntouched();
+					// Reset the fields by email model property
+					var props = ["name", "address", "subject", "message"];
+					for (i = 0; i < props.length; i++) {
+						$scope.email[props[i]] = "";
+					}
+					$scope.emailFormEl = false;
+				}
+			}
+		});
+	}
+
 	$scope.galleryScroll = function(index, dir) {
 		switch (dir) {
 			case "prev" : index -= 1;
@@ -137,7 +186,7 @@ app.controller("ctrl", function($scope, $http) {
 		if (index < 0 || index >= $scope.gallery.length || !Number.isInteger(index)) {
 			return;
 		}
-		$scope.toggleModal(true, $scope.gallery[index].path);
+		$scope.toggleGallery($scope.gallery[index].path);
 	}
 
 	$http({method: "GET", url: "/wallpapers"})
