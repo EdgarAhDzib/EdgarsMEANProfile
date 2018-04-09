@@ -2,12 +2,15 @@
 <html>
 <head>
 	<title>Edgar Martin del Campo</title>
-	<meta charset="utf-8" name="Description" content="The official page for Edgar Martin del Campo, PhD: web programmer, creative writer, and recovering academic.">
+	<meta charset="utf-8" name="Description" content="The official portfolio for Edgar Martin del Campo, PhD: web programmer, creative writer, and recovering academic.">
+	<meta property="og:site_name" content="Edgar Martin del Campo"/>
+	<meta property="og:image" content="assets/images/cerrito.jpg">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="favicon.ico" />
 	<link rel="stylesheet" type="text/css" href="assets/css/main.css" />
 	<link rel="stylesheet" type="text/css" href="assets/css/angular.css" />
 	<link rel="stylesheet" type="text/css" href="assets/css/modal.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/responsive.css" />
 </head>
 <script src="./assets/js/angular.min.js"></script>
 <script src="./assets/js/angular-animate.js"></script>
@@ -46,12 +49,9 @@
 					</div>
 				</form>
 			</div>
-
 			<div id="responseText" ng-show="emailSent">
 				{{emailResult}}
 			</div>
-
-
 			<div class="imgGallery" ng-show="galleryOpen" ng-repeat="images in gallery">
 				<div class="lightBoxComp" ng-show="images.selected">
 					<span ng-click="galleryScroll(images.index, 'prev')" ng-show="showLArrow" class="navArrows">&lt;&lt;</span>
@@ -62,17 +62,31 @@
 		</div>
 	</div>
 	<div id="navbar">
-		<h2>
-			<div class="panelItems">
-				<div class="index menuTab" ng-click="artRoute(0)"> Home </div>
-				<div class="app menuTab" ng-click="listSelect('app')"> Web Apps </div>
-				<div class="anec menuTab" ng-click="menuSelect('anec')"> Anecdotes </div>
-				<div class="story menuTab" ng-click="menuSelect('story')"> Stories </div>
-				<div class="essay menuTab" ng-click="menuSelect('essay')"> Essays </div>
-				<div class="link menuTab" ng-click="listSelect('link')"> Links </div>
-				<div class="about menuTab" ng-click="artRoute(16)"> About </div>
+		<div class="panelItems">
+			<div class="index menuTab" ng-click="artRoute(0)"> Home </div>
+			<div class="app menuTab" ng-click="listSelect('app')"> Web Apps </div>
+			<div class="anec menuTab" ng-click="menuSelect('anec')"> Anecdotes </div>
+			<div class="story menuTab" ng-click="menuSelect('story')"> Stories </div>
+			<div class="essay menuTab" ng-click="menuSelect('essay')"> Essays </div>
+			<div class="link menuTab" ng-click="listSelect('link')"> Links </div>
+			<div class="about menuTab" ng-click="artRoute(16)"> About </div>
+			<div class="mobileNavbar" ng-click="returnToPage(active)"> {{navbarTitle}} </div>
+			<div class="mobileNavbar" ng-click="navToggle()"> ☰ </div>
+		</div>
+	</div>
+	<div id="mobileMenu" ng-show="openNavbar">
+		<div ng-repeat="route in navBarRoutes" class="staggerEl">
+			<div class="navMenuRow" ng-click="menuRoute(route.click, route.arg, route.display)">{{route.display}}</div>
+		</div>
+		<div id="iconRowSpace">
+			<div class="navIconRow">
+				<div ng-repeat="link in navBarLinks">
+					<a href="{{link.click}}" target="_blank">
+						<img class="iconNav" ng-src="assets/images/icons/{{link.display}}" /> 
+					</a>
+				</div>
 			</div>
-		</h2>
+		</div>
 	</div>
 	<video ng-show="videoBkgd" ng-src="assets/images/wallpapers/{{videoSrc}}" type="video/mp4" autoplay muted loop id="vidBckg">
 		Your browser does not support HTML5 video.
@@ -119,12 +133,13 @@
 	</div>
 	<div id="navBottom">
 		<div class="panelItems">
-			<div class="gitHub iconTab"><a href="https://github.com/EdgarAhDzib/" target="_blank"><img class="icon" src="assets/images/icons/github64.png" /></a></div>
-			<div class="linkedIn iconTab"><a href="https://www.linkedin.com/in/edgar-martin-del-campo-7ba775125/" target="_blank"><img class="icon" src="assets/images/icons/linkedin64.png" /></a></div>
-			<div class="faceBook iconTab"><a href="https://www.facebook.com/ShamansCross/" target="_blank"><img class="icon" src="assets/images/icons/fb-likebutton-online-72.png" /></a></div>
-			<div class="youTube iconTab"><a href="https://www.youtube.com/channel/UCju74A_kAhFnnyPjq3JXRBQ" target="_blank"><img class="icon" src="assets/images/icons/YouTube-logo-full_color.png" /></a></div>
-			<div class="twitter iconTab"><a href="https://twitter.com/EdgarTlamatini" target="_blank"><img class="icon" src="assets/images/icons/Twitter_logo_blue.png" /></a></div>
-			<div class="iconTab" ng-click="openEmail()"><h2>Email</h2></div>
+			<div class="gitHub iconTab"> <a href="https://github.com/EdgarAhDzib/" target="_blank"><img class="icon" src="assets/images/icons/github64.png" /></a> </div>
+			<div class="linkedIn iconTab"> <a href="https://www.linkedin.com/in/edgar-martin-del-campo-7ba775125/" target="_blank"><img class="icon" src="assets/images/icons/linkedin64.png" /></a> </div>
+			<div class="faceBook iconTab"> <a href="https://www.facebook.com/ShamansCross/" target="_blank"><img class="icon" src="assets/images/icons/fb-likebutton-online-72.png" /></a> </div>
+			<div class="youTube iconTab"> <a href="https://www.youtube.com/channel/UCju74A_kAhFnnyPjq3JXRBQ" target="_blank"><img class="icon" src="assets/images/icons/YouTube-logo-full_color.png" /></a> </div>
+			<div class="twitter iconTab"> <a href="https://twitter.com/EdgarTlamatini" target="_blank"><img class="icon" src="assets/images/icons/Twitter_logo_blue.png" /></a> </div>
+			<div class="iconTab emailTab" ng-click="openEmail()"> Email </div>
+			<div id="emailMobile" ng-click="openEmail()"> Email </div>
 		</div>
 	</div>
 </body>

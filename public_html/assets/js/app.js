@@ -2,11 +2,20 @@ var app = angular.module("portfolio", ['ngSanitize', 'ngAnimate']);
 
 app.controller("ctrl", function($scope, $http) {
 
-	// Modal settings off by default
+	// Modal and dropdown settings off by default
 	$scope.isOpen = false;
 	$scope.galleryOpen = false;
 	$scope.emailFormEl = false;
 	$scope.emailSent = false;
+	$scope.openNavbar = false;
+
+	// Initialize navbar title and 'active' values, change after selection
+	$scope.navbarTitle = "Main Menu";
+	$scope.active = "main";
+
+	// Initialize routes and links for drop-down navbar in mobile view, change state to allow "entry"
+	$scope.navBarRoutes = [];
+	$scope.navBarLinks = [];
 
 	$http({method: "GET", url: "/index"})
 	.then(function(success){
@@ -198,7 +207,6 @@ app.controller("ctrl", function($scope, $http) {
 		if (videoType.test(randBackGd)) {
 			// Set up video background
 			$scope.videoBkgd = true;
-			console.log(randBackGd);
 			$scope.videoSrc = randBackGd;
 		} else {
 			randBackGd = "url(/assets/images/wallpapers/" + randBackGd + ")";
@@ -208,4 +216,89 @@ app.controller("ctrl", function($scope, $http) {
 	}, function(error){
 		console.log("Error:", error);
 	});
+
+	$scope.navToggle = function(open) {
+		$scope.openNavbar = !$scope.openNavbar;
+		$scope.navBarRoutes = [
+			{
+				click: "artRoute",
+				arg: 0,
+				display: "Home"
+			},
+			{
+				click: "listSelect",
+				arg: "app",
+				display: "Web Apps"
+			},
+			{
+				click: "menuSelect",
+				arg: "anec",
+				display: "Anecdotes"
+			},
+			{
+				click: "menuSelect",
+				arg: "story",
+				display: "Stories"
+			},
+			{
+				click: "menuSelect",
+				arg: "essay",
+				display: "Essays"
+			},
+			{
+				click: "listSelect", // 'link'
+				arg: "link",
+				display: "Links"
+			},
+			{
+				click: "artRoute",
+				arg: 16,
+				display: "About"
+			}
+		];
+
+		$scope.navBarLinks = [
+			{
+				click: "https://github.com/EdgarAhDzib/",
+				display: "github64.png"
+			},
+			{
+				click: "https://www.linkedin.com/in/edgar-martin-del-campo-7ba775125/",
+				display: "linkedin64.png"
+			},
+			{
+				click: "https://www.facebook.com/ShamansCross/",
+				display: "fb-likebutton-online-72.png"
+			},
+			{
+				click: "https://www.youtube.com/channel/UCju74A_kAhFnnyPjq3JXRBQ",
+				display: "YouTube-logo-full_color.png"
+			},
+			{
+				click: "https://twitter.com/EdgarTlamatini",
+				display: "Twitter_logo_blue.png"
+			}
+		];
+	}
+
+	$scope.menuRoute = function(func, arg, title, pass=false) {
+		// Call the function and pass its argument
+		$scope[func](arg);
+		$scope.navbarTitle = title;
+		$scope.active = arg;
+		if (!pass) {
+			$scope.navToggle();
+		}
+	}
+
+	$scope.returnToPage = function(active) {
+		if (active == "main") {
+			$scope.navToggle();
+		} else {
+			var object = $scope.navBarRoutes.filter(function( obj ) {
+				return obj.arg == active;
+			});
+			$scope.menuRoute(object[0].click, object[0].arg, object[0].display, true);
+		}
+	}
 });

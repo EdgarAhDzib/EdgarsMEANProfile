@@ -1,0 +1,145 @@
+/* Tablet view */
+@media only screen and (max-width: 960px) {
+
+article {
+	padding-top: 120px;
+}
+
+#navbar {
+	height: 90px;
+}
+
+#navBottom {
+	height: 125px;
+}
+
+.menuTab, .iconTab {
+	float: left;
+	text-align: center;
+	font-size: 120%;
+	font-weight: 600;
+	position: relative;
+}
+
+.menuTab {
+	width: 21%;
+}
+
+.iconTab {
+	width: 30%;
+	height: 54px;
+}
+
+.emailTab {
+	vertical-align: text-top;
+	padding: 0px;
+}
+
+.panelItems {
+	margin-top: 0px;
+	margin-left: 10%;
+	margin-right: 0%;
+	width: 80vw;
+	vertical-align: middle;
+	color: white;
+
+	display: inline-block;
+	position: relative;
+}
+
+.ng-scope:last-child {
+	margin-bottom: 240px;
+}
+
+}
+
+/* Mobile view */
+@media only screen and (max-width: 720px) {
+
+.menuTab, .iconTab {
+	display: none;
+}
+
+#navbar, #navBottom {
+	height: 60px;
+}
+
+#container {
+	width: 100%;
+}
+
+article {
+	/* Enough space to display browser's scroll bar */
+	width: 86.5%;
+	padding-right: 10%;
+}
+
+#emailMobile {
+	display: block;
+	margin: auto;
+	padding-top: 10px;
+	text-align: center;
+	font-size: 200%;
+	font-weight: 600;
+}
+
+.iconNav {
+	padding: 5px;
+	max-width: 50px;
+
+	-webkit-filter: drop-shadow(1px 0 0 white)
+		drop-shadow(-1px 0 0 white)
+		drop-shadow(0 -1px 0 white)
+		drop-shadow(0 -1px 0 white);
+	filter: drop-shadow(1px 0 0 white)
+		drop-shadow(-1px 0 0 white)
+		drop-shadow(0 -1px 0 white)
+		drop-shadow(0 -1px 0 white);
+}
+
+.mobileNavbar {
+	display: inline-block;
+	padding-top: 10px;
+	font-size: 200%;
+	font-weight: 600;
+}
+
+.panelItems {
+	display: flex;
+	justify-content: space-between;
+}
+
+#mobileMenu {
+	margin-top: 55px;
+	position: absolute;
+	z-index: 5;
+	display: block;
+}
+
+.navMenuRow, #iconRowSpace {
+	background: #0d3403;
+}
+
+.navMenuRow {
+	height: 50px;
+	font-size: 200%;
+	font-weight: 600;
+	color: white;
+	width: 100vw;
+	text-align: center;
+	padding: 5px;
+}
+
+.navIconRow {
+	height: 70px;
+	display: flex;
+	justify-content: space-between;
+	margin-left: 10%;
+	margin-right: 10%;
+}
+
+#iconRowSpace {
+	width: 100vw;
+}
+
+}

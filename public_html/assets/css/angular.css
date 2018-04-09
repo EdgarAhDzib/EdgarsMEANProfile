@@ -1,5 +1,5 @@
 .ng-enter {
-	-webkit-transition: 1s linear all;
+	-webkit-transition: 0.5s linear all;
 	transition: 0.5s linear all;
 	opacity: 0;
 }
@@ -7,3 +7,31 @@
 .ng-enter.ng-enter-active {
 	opacity: 1;
 }
+
+#mobileMenu.ng-enter {
+	-webkit-transition: .5s linear all;
+	transition: .5s linear all;
+	transform:translateY(0);
+}
+
+#mobileMenu.ng-enter-active {
+	transform:translateY(100%);
+}
+
+article .ng-enter-stagger {
+	transition-delay: 0.4s;
+	transition-duration: 0;
+}
+
+/* Needs debugging */
+/*
+#mobileMenu.ng-leave {
+	-webkit-transition: .5s linear all;
+	transition: .5s linear all;
+	transform:translateY(0);
+}
+
+#mobileMenu.ng-leave-active {
+	transform:translateY(-100%);
+}
+*/
