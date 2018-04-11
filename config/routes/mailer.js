@@ -4,7 +4,9 @@ const express = require("express");
 const router = express.Router();
 
 var transporter = nodemailer.createTransport({
-  service: 'Gmail',
+  service: 'SMTP',
+  host: '[ID.HOST.com]',
+  port: 465,
   auth: keys
 });
 
@@ -25,8 +27,8 @@ router.post("/mailer", (req, res) => {
 	} else {
 		// Complete the delivery
 		var mailOptions = {
-			from: '"' + req.body.name + '" <' + req.body.address + '>', // Actually "from" E@GC
-			to: 'edgarmdcesp@gmail.com',
+			from: '"' + req.body.name + '" <' + req.body.address + '>',
+			to: 'edgar@edgarmartindelcampo.com',
 			subject: req.body.subject,
 			text: message,
 			html: '"' + req.body.name + '" ' + req.body.address + '<br/>' + message
