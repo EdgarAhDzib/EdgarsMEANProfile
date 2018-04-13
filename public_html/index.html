@@ -98,14 +98,14 @@
 					<div class="tnContainer">
 						<a href="{{element.link}}" target="_blank"><img class="linkTn" ng-src="assets/images/{{element.image}}" /></a>
 					</div>
-					<div class="itemContainer">
-						<span class="linkTitle"><a href="{{element.link}}" target="_blank" ng-bind-html="element.title"></a></span>
-						<br/>
-						<br/>
-						<span class="linkSub" ng-bind-html="element.description"></span>
+					<div class="itemContainer linkTitle">
+						<a href="{{element.link}}" target="_blank" ng-bind-html="element.title"></a>
 					</div>
 					<br/>
+					<div class="linkDesc" ng-bind-html="element.description"></div>
+					<div style="clear: both;"></div>
 				</div>
+				<br/>
 			</div>
 			<div ng-repeat="item in results">
 				<div id="menuItem{{item.id}}">

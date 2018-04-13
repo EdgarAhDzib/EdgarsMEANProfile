@@ -107,19 +107,27 @@ video {
 }
 
 .menuElement {
-	display: flex;
-	padding-bottom: 50px;
+	margin-bottom: 50px;
+}
+
+.linkDesc {
+	margin-left: 30px;
+	margin-top: 8px;
+	display: block;
 }
 
 .tnContainer {
-	display : inline;
+	display : block;
 	float: left;
+	height: 120px;
+	width: 100px;
+	margin-right: 30px;
 }
 
 .itemContainer {
 	display : inline;
-	overflow-y: visible;
-	margin-left: 30px;
+	background-color: black;
+	width: 100%;
 }
 
 .linkTitle {

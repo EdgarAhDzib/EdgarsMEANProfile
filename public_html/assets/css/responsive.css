@@ -142,4 +142,18 @@ article {
 	width: 100vw;
 }
 
+.itemContainer {
+	/*Inline keeps the title at right, block and inline-block flush it past the image's bottom*/
+	display : inline;
+	overflow: auto;
+}
+
+.linkDesc {
+	margin-left: 0px;
+	margin-top: 5px;
+	float: left;
+	display: block;
+	position: relative;
+}
+
 }
