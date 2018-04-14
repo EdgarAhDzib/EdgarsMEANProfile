@@ -70,7 +70,7 @@ article {
 
 article {
 	/* Enough space to display browser's scroll bar */
-	width: 86.5%;
+	width: 87.5%;
 	padding-right: 10%;
 }
 
@@ -143,9 +143,8 @@ article {
 }
 
 .itemContainer {
-	/*Inline keeps the title at right, block and inline-block flush it past the image's bottom*/
-	display : inline;
-	overflow: auto;
+	display : block;
+	height: 120px;
 }
 
 .linkDesc {
@@ -154,6 +153,25 @@ article {
 	float: left;
 	display: block;
 	position: relative;
+}
+
+/* Reduce the email modal */
+textarea {
+	right: 0px;
+	width: 295px;
+	height: 125px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+input[type=text], input[type=email] {
+	right: 0px;
+	width: 60%;
+}
+
+#emailSection {
+	width: 300px;
+	display:block;
 }
 
 }
